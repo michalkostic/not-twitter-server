@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:15.2
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=not_twitter
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db:/var/lib/postgresql/data
+      - ../migrations/schema/tables.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8089:8080
