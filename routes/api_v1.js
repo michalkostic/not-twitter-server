@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 var express = require('express');
+const { getMessages, addMessage } = require('../models/messages');
 var router = express.Router();
 
 const messages = [
@@ -31,12 +32,28 @@ const messages = [
 
 /* GET home page. */
 router.get('/messages', function(req, res, next) {
-  res.json(messages);
+  getMessages().then(
+    (messages) => {      
+      res.json(messages.rows);
+    } 
+  ).catch(
+    (err) => {      
+      console.log(err);
+      res.status(500);
+    }
+  );
 });
 
 router.post('/messages', function(req, res, next) {
-  messages.push(req.body);
-  res.status(200);
+  addMessage(req.body).then(
+      (r) => res.status(200)
+    ).catch(
+      (e) => {
+        console.log(e);
+        res.status(500);
+      }
+    );
+  ;
 });
 
 
