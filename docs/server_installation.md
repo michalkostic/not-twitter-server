@@ -46,3 +46,14 @@ pm2 start ecosystem.config.js
 sudo amazon-linux-extras enable nginx1
 yum clean metadata
 sudo yum install nginx
+
+ # Create reverse proxy record - see not_twitter.conf file in external-configs
+ sudo vim /etc/nginx/conf.d/not_twitter.conf
+ sudo service nginx restart
+
+ # SSL/TLS certificat using Let's encrypt
+sudo amazon-linux-extras install epel -y
+sudo yum install certbot
+
+sudo pip3 install certbot certbot-nginx
+sudo /usr/local/bin/certbot --nginx
