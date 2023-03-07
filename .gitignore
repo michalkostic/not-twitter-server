@@ -131,3 +131,5 @@ dist
 
 devlocal_setup/db/*
 !**/.gitkeep
+
+config.secrets.js

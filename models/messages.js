@@ -1,11 +1,12 @@
 const {Pool} = require('pg');
+const {config} = require('../config.secrets')
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'not_twitter',
-    password: 'postgres',
-    port: 5432,
+    user: config.db.user,
+    host: config.db.host,
+    database: config.db.database,
+    password: config.db.password,
+    port: config.db.port,
   });
 
 exports.getMessages = function() {
